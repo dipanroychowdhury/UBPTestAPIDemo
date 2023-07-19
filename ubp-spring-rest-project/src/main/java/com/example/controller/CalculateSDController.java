@@ -47,7 +47,7 @@ public class CalculateSDController {
      * Gets standard deviation by id.
      *
      * @param vectorId the vector id
-     * @return the vectors by id
+     * @return the standard deviation value by id
      * @throws ResourceNotFoundException the resource not found exception
      */
     @GetMapping("/sdcalculation/{id}")
