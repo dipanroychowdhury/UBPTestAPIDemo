@@ -10,4 +10,5 @@ public interface CalculateSDService {
 
     VectorDetails getVectorsById (Integer vectorId);
     List<VectorDetails> getAllVectors();
+    Double calculateSD(String vectors);
 }

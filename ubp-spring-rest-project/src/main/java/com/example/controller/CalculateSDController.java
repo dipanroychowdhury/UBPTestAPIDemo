@@ -43,4 +43,20 @@ public class CalculateSDController {
         return ResponseEntity.ok().body(vectorDetails);
     }
 
+    /**
+     * Gets standard deviation by id.
+     *
+     * @param vectorId the vector id
+     * @return the vectors by id
+     * @throws ResourceNotFoundException the resource not found exception
+     */
+    @GetMapping("/sdcalculation/{id}")
+    public ResponseEntity<Double> getStandardDeviation(@PathVariable(value = "id") Integer vectorId)
+            throws ResourceNotFoundException {
+        VectorDetails vectorDetails = calculateSDService.getVectorsById(vectorId);
+        Double standardDeviation = calculateSDService.calculateSD(vectorDetails.getVectorValues());
+        return ResponseEntity.ok().body(standardDeviation);
+    }
+
+
 }

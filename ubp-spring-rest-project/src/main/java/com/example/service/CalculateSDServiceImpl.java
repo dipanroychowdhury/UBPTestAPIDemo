@@ -6,6 +6,8 @@ import com.example.repository.CalculateSDRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,7 +28,13 @@ public class CalculateSDServiceImpl implements CalculateSDService{
         return calculateSDRepository.findAll();
     }
 
-
+    @Override
+    public Double calculateSD(String vectors) {
+        String[] strSplit = vectors.split("|");
+        List<String> vectorList = new ArrayList<String>(Arrays.asList(strSplit));
+        Double standardDeviation = calculateSD(toDoubleArray(vectorList));
+        return null;
+    }
 
     public double calculateSD(double numArray[])
     {
@@ -46,5 +54,25 @@ public class CalculateSDServiceImpl implements CalculateSDService{
         }
 
         return Math.sqrt(standardDeviation/length);
+    }
+
+    public static double[] toDoubleArray(List<String> stringArray) {
+        if (stringArray == null) {
+            return null;
+        }
+        double[] result = new double[stringArray.size()];
+        for (int i = 0; i < stringArray.size(); i++) {
+            try {
+                if (stringArray.get(i) != null) {
+                    result[i] = Double.parseDouble(stringArray.get(i));
+                } else {
+                    result[i] = 0.0;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                result[i] = 0;
+            }
+        }
+        return result;
     }
 }
